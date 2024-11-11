@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> <!-- Home page -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style_footer.css">
+        <link rel="stylesheet" href="assets/css/style_header.css">
+        <link rel="stylesheet" href="assets/css/style_faq.css">
+    <title>MatchPoint</title><!-- Titulo da pagina -->
+    <script src="https://kit.fontawesome.com/9847d1c927.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body onload="salvaLocalStorage()">
+        <!-- Início do cabeçalho -->
+    <header class="cabecalho">
+        <div class="imglogo">
+            <a href="HomePage.html"><img src="assets/img/matchpoint.png" alt="Logo MatchPoint"></a>
+        </div>
+        <nav class="secoes">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="Perfilvisualizavel.html" aria-expanded="false">Navegar</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Grupos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="CriarGrupo.html">Criar Grupo</a></li>
+                        <li><a class="dropdown-item" href="MeusGrupos.html">Meus Grupos</a></li>
+                        <li><a class="dropdown-item" href="HomePage.html">Todos Grupos</a></li>
+                    </ul>
+                </li>
+                <li><a href="Mapa.html">Mapa</a></li>
+                <li><a href="FAQ.html"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="meuperfil">
+            <li class="nav-item dropdown" style="list-style: none;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="userNameDropdown"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="meuperfil.html">Meu Perfil</a></li>
+                    <li><a class="dropdown-item" href="index.html">Sair</a></li>
+                </ul>
+            </li>
+        </div>
+        
+
+
+    </header>
+    <!-- Fim do cabeçalho -->
+
+    <main>
+        <section class="faq">
+            <div class="faq-header">
+                <h2></h2>
+            </div>
+            <div class="faq-questions">
+                <h3>PERGUNTAS FREQUENTES</h3>
+                <ul>
+                    <li>
+                        <span class="question">1. Como posso encontrar um grupo de esportes próximo a mim?</span>
+                        <div class="answer">Você pode encontrar um grupo de esportes próximo a você usando a ferramenta de busca em nosso site ou consultando o mapa de grupos disponíveis.</div>
+                    </li>
+                    <li>
+                        <span class="question">2. É necessário algum custo para participar dos grupos de esporte listados no site?</span>
+                        <div class="answer">A participação na maioria dos grupos é gratuita, mas alguns podem cobrar uma taxa. Verifique os detalhes de cada grupo para mais informações.</div>
+                    </li>
+                    <li>
+                        <span class="question">3. Como posso me registrar no site?</span>
+                        <div class="answer">Para se registrar, clique no botão 'Registrar' no canto superior direito da página e preencha o formulário com suas informações.</div>
+                    </li>
+                    <li>
+                        <span class="question">4. O que faço se não houver nenhum grupo para o esporte que eu pratico na minha área?</span>
+                        <div class="answer">Se não houver um grupo para o esporte que você pratica, você pode criar um novo grupo no site e convidar outras pessoas a se juntarem.</div>
+                    </li>
+                </ul>
+            </div>
+            
+        </section>
+        <section class="ask-question">
+            <h2>ESCREVA SUA PERGUNTA ABAIXO</h2>
+            <textarea placeholder="Digite aqui sua dúvida."></textarea>
+            <button type="button">ENVIAR</button>
+        </section>
+    </main>
+
+
+    <!-- Começo rodape -->
+    <footer>
+        <p>&copy; 2024 MatchPoint. Todos os direitos reservados.</p>
+    </footer>
+    <!-- Fim rodape -->
+
+    <!--script q faz o bootstrap funcionar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!--script q faz o javacript funcionar -->
+    <script src="assets/script/FAQ.js"></script>    <script src="assets/script/cabecalho.js"></script>
+
+</body>
+
+</html>

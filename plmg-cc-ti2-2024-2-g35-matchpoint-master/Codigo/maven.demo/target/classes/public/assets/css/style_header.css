@@ -1,0 +1,89 @@
+/* Estilos para o cabeçalho */
+.cabecalho {
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #000;
+    align-items: center;
+}
+
+.imglogo img {
+    width: 20%;
+    height: auto;
+}
+
+.secoes ul {
+    margin: 0;
+    padding: 0;
+}
+
+.secoes ul li {
+    display: inline-block;
+    padding: 30px;
+}
+
+.secoes ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.secoes ul li a:hover {
+    color: #ccc;
+}
+
+.secoes .dropdown-menu {
+    background-color: #333;
+    border: none;
+}
+
+.secoes .dropdown-menu .dropdown-item {
+    color: #f36f21;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 5px 10px;
+    font-size: medium;
+    line-height: 1.5;
+}
+
+.secoes .dropdown-menu .dropdown-item:hover {
+    background-color: #555;
+    color: #f36f21;
+}
+
+.meuperfil {
+    float: right;
+    color: white;
+}
+
+.meuperfil a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.meuperfil a:hover {
+    color: #ccc;
+}
+
+.meuperfil .dropdown-menu .dropdown-item {
+    color: #f36f21;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 5px 10px;
+    font-size: medium;
+    line-height: 1.5;
+}
+
+.meuperfil .dropdown-menu .dropdown-item:hover {
+    background-color: #555;
+    color: #f36f21;
+
+}
+
+.meuperfil .dropdown-menu {
+    background-color: #333;
+    border: none;
+}

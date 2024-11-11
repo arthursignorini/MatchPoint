@@ -1,0 +1,24 @@
+/* Estilos para o rodapé */
+footer {
+    position: absolute;
+    text-align: center;
+    padding: 7px;
+    background-color: #000;
+    color: white;
+    bottom: 0;
+    width: 97.7%;
+
+    
+}
+body {
+    position: relative;
+    min-height: 100vh; /* Garante que o body tenha pelo menos a altura da viewport */
+    margin: 0;
+    padding-bottom: 60px; /* Altura do rodapé */
+    background-color: #121212;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+

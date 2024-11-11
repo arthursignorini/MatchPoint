@@ -1,0 +1,82 @@
+/* Estilos para a página de perfis visíveis */
+
+.Perfilvisualizavel {
+    padding: 20px;
+    background-color: #121212;
+    color: #ccc;
+    font-family: 'Roboto', sans-serif;
+}
+
+.search-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-input {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #f36f21;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#container-dos-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card .card-body {
+    padding: 15px;
+}
+
+.card .card-title {
+    color: #f36f21;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card .card-title a {
+    text-decoration: none; /* Remover sublinhado dos links */
+    color : #f36f21;
+}
+
+.card .card-title a:hover {
+    text-decoration: underline;
+}
+
+.card .card-text {
+    color: white; /* Cor branca para a bio */
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    #container-dos-cards {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}

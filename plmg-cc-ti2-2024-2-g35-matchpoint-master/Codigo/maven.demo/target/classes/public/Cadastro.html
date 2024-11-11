@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="assets/css/Cadastro.css">
+  <script src="https://kit.fontawesome.com/9847d1c927.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <button class="btn-back" onclick="window.location.href='index.html'">
+    <a href="index.html"><i class="fas fa-arrow-left"></i> </a>
+  </button>
+  <div class="main-cadastro">
+    <div class="left-cadastro">
+      <h1>Bem vindo ao Matchpoint</h1>
+      <a href="Login.html"><img src="assets/img/matchpoint.png" alt="Logo" class="left-cadastro-image"></a>
+    </div>
+
+    <div class="right-cadastro">
+      <div class="card-cadastro">
+        <h1>Fazer Cadastro</h1>
+
+        <!-- Formulário de Cadastro -->
+        <form method="POST" action="/cadastrar">
+          <div class="text-field">
+            <label id="labelNome" for="name">Nome de Usuário</label>
+            <input id="campoNome" name="nome" type="text" placeholder="Entre com seu usuário" required>
+          </div>
+
+          <div class="text-field">
+            <label id="labelEmail" for="E-mail">E-mail</label>
+            <input id="campoEmail" name="email" type="email" placeholder="Entre com seu E-mail" required>
+          </div>
+
+          <div class="text-field">
+            <label id="labelSenha" for="Password">Senha</label>
+            <input id="campoSenha" name="senha" type="password" placeholder="Entre com sua senha" required>
+          </div>
+
+          <!-- Botão para enviar o formulário -->
+          <button id="btnCadastro" class="btn-cadastro" type="submit">Cadastrar</button>
+        </form>
+        <!-- Fim do Formulário -->
+
+        <div id="tela"></div>
+        <div class="text-field">
+          <label for="cadastro"><a href="Login.html">Já tem uma conta? clique aqui para fazer seu Login</a></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/script/cadastro.js"></script>
+</body>
+
+</html>

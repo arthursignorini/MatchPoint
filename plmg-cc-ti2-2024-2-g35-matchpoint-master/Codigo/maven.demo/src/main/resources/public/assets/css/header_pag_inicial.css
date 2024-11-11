@@ -1,0 +1,68 @@
+/* Estilos para o cabeçalho */
+.cabecalho {
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #000;
+    align-items: center;
+}
+
+.imglogo img {
+    width: 20%;
+    height: auto;
+}
+
+.secoes ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.secoes ul li {
+    padding: 10px;
+    list-style: none; /* Remove os marcadores de lista */
+}
+
+.secoes ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block; /* Garante que cada item de lista seja um bloco inline */
+    padding: 10px 20px; /* Espaçamento interno dos links */
+}
+
+.secoes ul li a:hover {
+    color: #ccc;
+}
+
+.FAQ {
+    margin-left: 20px; /* Espaçamento entre "Sobre" e "FAQ" */
+}
+
+.FAQ a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.FAQ a:hover {
+    color: #ccc;
+}
+
+.login-cadastro {
+    margin-left: auto; /* Coloca o botão de Login/Cadastro à direita */
+}
+
+.login-cadastro a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-cadastro a:hover {
+    color: #ccc;
+}

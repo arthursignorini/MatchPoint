@@ -1,0 +1,329 @@
+.container-form h2 {
+    text-align: center;
+    color: #f36f21;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    width: 100%;
+}
+
+.form-control:focus,
+.form-control:not(:placeholder-shown) {
+    color: #fff;
+}
+
+.form-control option {
+    background-color: #1c1c1c;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #f36f21;
+}
+
+.btn {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #f36f21;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* CSS para os grupos */
+.grupos-container {
+    flex: 1;
+    margin: 20px auto;
+    max-width: 1000px;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+}
+
+.card.grupo {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card.grupo h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card.grupo p {
+    margin: 5px 0;
+}
+
+.card-img-container {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.editar-button {
+    background-color: #f36f21;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+}
+
+.editar-button:hover {
+    background-color: #333;
+    color: white;
+}
+
+.deletar-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.deletar-button:hover {
+    background-color: #c82333;
+}
+
+.deletar-button:disabled {
+    background-color: #dc3545;
+    cursor: not-allowed;
+}
+
+.confirm-delete {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.confirm-delete p {
+    margin: 0 0 10px 0;
+}
+
+.confirm-yes, .confirm-no {
+    background-color: #f36f21;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.confirm-yes:hover, .confirm-no:hover {
+    background-color: #c82333;
+}
+.criador {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+}
+#empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #1c1c1c; /* Fundo escuro */
+    color: #fff; /* Texto branco */
+    border-radius: 10px;
+    margin-top: 0px;
+}
+.btn-seguir {
+    width: 150px; /* Definindo largura fixa para evitar que o texto quebre */
+    padding: 10px;
+    margin: 5px 5px;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-seguir:focus {
+    outline: none;
+}
+
+.btn-seguir:hover {
+    background-color: #5a5a5a; /* Cor mais escura ao passar o mouse */
+}
+
+.btn-seguir.btn-success {
+    background-color: #28a745; /* Cor verde para o botão "Seguindo" */
+    color: #fff; /* Texto branco */
+}
+
+.btn-seguir.btn-success:disabled {
+    background-color: #28a745; /* Cor verde para o botão "Seguindo" desativado */
+    cursor: not-allowed;
+}
+
+.card-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+/* Estilo para o botão "Sair" nos cards dos grupos */
+.btn-sair {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 0.25rem;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-sair:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-sair:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+.participando {
+    
+    display: inline-block;
+    width: 150px; /* Dividir o espaço com margem de 5px */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #28a745; /* Verde */
+    border-color: #28a745;
+    border-radius: 0.25rem;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.participando:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.participando:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+/* Estilo para o título "Grupos que você participa" */
+.participando-title {
+    color: #f36f21;
+    font-size: 1.5rem; /* Tamanho de fonte desejado */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+.card-button-container {
+    display: flex; /* Utilizando flexbox para alinhar os botões */
+    justify-content: space-between; /* Espaçamento entre os botões */
+}
+
+.card-button-container .btn {
+    flex-grow: 1; /* Faz os botões expandirem igualmente dentro do container */
+    margin: 0 5px; /* Margem mínima entre os botões */
+}
+.participando {
+    
+    display: inline-block;
+    width: 150px; /* Dividir o espaço com margem de 5px */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #28a745; /* Verde */
+    border-color: #28a745;
+    border-radius: 0.25rem;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.participando:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.participando:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+/* Estilo para o título "Grupos que você participa" */
+.participando-title {
+    color: #f36f21;
+    font-size: 1.5rem; /* Tamanho de fonte desejado */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+.participants-count {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.participants-count i {
+    margin-right: 5px; /* Espaço entre o ícone e o número de participantes */
+}
+
+

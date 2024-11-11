@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha sua Imagem</title>
+    <link rel="stylesheet" href="assets/css/IA.css">
+</head>
+<body>
+
+          <!-- Início do cabeçalho -->
+          <header class="cabecalho">
+            <div class="imglogo">
+                <a href="HomePage.html"><img src="assets/img/matchpoint.png" alt="Logo MatchPoint"></a>
+            </div>
+            <nav class="secoes">
+                <ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Perfilvisualizavel.html" aria-expanded="false">Navegar</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Grupos</a>
+                     
+                    </li>
+                    <li><a href="Mapa.html">Mapa</a></li>
+                    <li><a href="FAQ.html"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Fim do cabeçalho -->
+         
+
+        <main>
+            <div class="ia">
+            <h1>Envie sua Imagem para Análise</h1>
+            <input type="file" id="imagem" accept="image/*" style="display: none;" />
+            <label for="imagem" class="upload-label">Escolha imagem</label>
+            <button id="uploadBtn" disabled>Enviar</button>
+            <div id="resultado"></div>
+            </div>
+            <script>
+                document.getElementById('imagem').addEventListener('change', function() {
+                    document.getElementById('uploadBtn').disabled = !this.files.length;
+                });
+        
+                document.getElementById('uploadBtn').addEventListener('click', async function() {
+                    const fileInput = document.getElementById('imagem');
+                    const file = fileInput.files[0];
+        
+                    if (!file) return alert("Por favor, selecione uma imagem.");
+        
+                    // Detalhes da API Custom Vision
+                    const endpoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/dc06014f-a870-4eed-a1fc-b89a273311e6/classify/iterations/MatchPoint/image";
+                    const predictionKey = "7f7e301ecf9247798b05bc9f12567333";
+        
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Prediction-Key': predictionKey,
+                                'Content-Type': 'application/octet-stream' // Tipo de conteúdo correto para arquivos binários
+                            },
+                            body: file // Envia o arquivo de imagem como corpo da requisição
+                        });
+        
+                        if (!response.ok) {
+                            throw new Error(`Erro ao enviar a imagem: ${response.statusText}`);
+                        }
+        
+                        const result = await response.json();
+                        const predictions = result.predictions;
+                        const highestPrediction = predictions.reduce((max, prediction) => prediction.probability > max.probability ? prediction : max);
+        
+                        let outputMessage = "";
+                        if (highestPrediction.probability >= 0.5) {
+                            outputMessage = `Predição: ${highestPrediction.tagName} com ${Math.round(highestPrediction.probability * 100)}% de confiança.`;
+                        } else {
+                            outputMessage = "Não foi possível prever com confiança.";
+                        }
+        
+                        document.getElementById('resultado').innerText = outputMessage;
+                    } catch (error) {
+                        console.error('Erro ao enviar imagem:', error);
+                        document.getElementById('resultado').innerText = 'Erro ao enviar imagem para a API.';
+                    }
+                });
+            </script>
+            </main>
+
+    
+    <footer>
+        <p>&copy; 2024 MatchPoint. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

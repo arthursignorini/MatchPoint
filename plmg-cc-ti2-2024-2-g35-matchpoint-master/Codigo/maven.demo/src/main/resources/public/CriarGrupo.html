@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchPoint</title>
+    <link rel="icon" href="assets/imagens/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style_header.css">
+    <link rel="stylesheet" href="assets/css/style_footer.css">
+    <link rel="stylesheet" href="assets/css/style_criargrupo.css">
+    <script src="https://kit.fontawesome.com/9847d1c927.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+      <!-- Início do cabeçalho -->
+      <header class="cabecalho">
+        <div class="imglogo">
+            <a href="HomePage.html"><img src="assets/img/matchpoint.png" alt="Logo MatchPoint"></a>
+        </div>
+        <nav class="secoes">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="Perfilvisualizavel.html" aria-expanded="false">Navegar</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Grupos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="CriarGrupo.html">Criar Grupo</a></li>
+                        <li><a class="dropdown-item" href="MeusGrupos.html">Meus Grupos</a></li>
+                        <li><a class="dropdown-item" href="HomePage.html">Todos Grupos</a></li>
+                    </ul>
+                </li>
+                <li><a href="Mapa.html">Mapa</a></li>
+                <li><a href="FAQ.html"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="meuperfil">
+            <li class="nav-item dropdown" style="list-style: none;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="userNameDropdown"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="meuperfil.html">Meu Perfil</a></li>
+                    <li><a class="dropdown-item" href="index.html">Sair</a></li>
+                </ul>
+            </li>
+        </div>
+        
+
+
+    </header>
+    <!-- Fim do cabeçalho -->
+
+
+
+    <!-- Início do formulário de criar grupo -->
+    <div class="container-form">
+        <h2>CRIAR GRUPO DE ESPORTES</h2>
+        <form id="grupoForm" onsubmit="salvarFormulario(event)">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nome">NOME:</label>
+                    <input type="text" id="nome" class="form-control" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="esporte">ESPORTE:</label>
+                    <select id="esporte" class="form-control" onchange="atualizarOpcoesDeImagem(this.value)">
+                        <option value="" disabled selected>Selecione um esporte</option>
+                        <option value="volei">Vôlei</option>
+                        <option value="futebol">Futebol</option>
+                        <option value="basquete">Basquete</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12 foto">
+                    <label for="foto">FOTO:</label>
+                    <!-- Placeholder clicável -->
+                    <div class="foto-placeholder"></div>
+                    <!-- Container de seleção de imagem -->
+                    <div id="imageSelectionContainer" class="image-selection-container" onclick="hideImageSelection(event)">
+                        <div id="imageSelection" class="image-selection" onclick="event.stopPropagation()">
+                            <div id="avisoEsporteNaoSelecionado" style="display: none; color: red;">Por favor, selecione um esporte antes de escolher a imagem.</div>
+                            <!-- Imagens serão inseridas dinamicamente aqui -->
+                        </div>
+                    </div>
+                    <button id="removerImagemBtn" type="button" onclick="removerImagem()" style="display: none;">Remover Imagem</button>
+                    <input type="hidden" id="fotoInput" name="fotoInput">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="data">DATA:</label>
+                    <input type="date" id="data" class="form-control" >
+                    <div id="avisoDataInvalida" style="display: none; color: red;">Por favor, selecione uma data a partir de hoje.</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="horario">HORÁRIO:</label>
+                    <input type="time" id="horario" class="form-control">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="jogadores">JOGADORES:</label>
+                    <input type="number" id="jogadores" class="form-control" max="30" min="2">
+                    <div id="avisoLimitemin" style="display: none; color: red;">O número mínimo de jogadores é 2.</div>
+                    <div id="avisoLimitemax" style="display: none; color: red;">O limite máximo de 30 jogadores foi atingido.</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="local">LOCAL:</label>
+                    <input type="text" id="local" class="form-control" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">DESCRIÇÃO:</label>
+                <textarea id="descricao" autocomplete="off" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="submit-btn"><span>CRIAR GRUPO</span></button>
+        </form>
+        <!-- Mensagem de limite máximo -->
+        <div id="limiteMaximoMensagem" class="modal-block">
+        <p>O limite máximo de grupos é 4.</p>
+
+        <button onclick="verMeusGrupos()">Meus Grupos</button>
+    </div>
+    <div id="localImageContainer" class="local-image-container" style="display: none;">
+        <div class="interactive-image">
+            <img src="assets/img/Quadras.png" alt="Mapa do local">
+            <div class="hover-area campo" data-local="Campo" style="left: 42px; top: 55px; width: 103px; height: 164px;"></div>
+            <div class="hover-area quadra-coberta" data-local="Quadra Coberta" style="left: 253px; top: 0px; width: 65px; height: 106px;"></div>
+            <div class="hover-area quadra-5" data-local="Quadra 5" style="left: 254px; top: 115px; width: 54px; height: 86px;"></div>
+            <div class="hover-area quadra-6" data-local="Quadra 6" style="left: 333px; top: 116px; width: 52px; height: 85px;"></div>
+            <div class="hover-area quadra-4" data-local="Quadra 4" style="left: 333px; top: 219px; width: 50px; height: 81px;"></div>
+            <div class="hover-area quadra-2" data-local="Quadra 2" style="left: 260px; top: 320px; width: 51px; height: 85px;"></div>
+            <div class="hover-area quadra-3" data-local="Quadra 3" style="left: 337px; top: 321px; width: 54px; height: 83px;"></div>
+            <div class="hover-area quadra-1" data-local="Quadra 1" style="left: 266px; top: 424px; width: 122px; height: 73px;"></div>
+        </div>
+        <button id="okButton" class="btn btn-primary" onclick="ocultarLocalContainer()">OK</button>
+    </div>
+    
+    
+        <!-- Aviso de esporte não selecionado -->
+    </div>
+    <!-- Fim do formulário de criar grupo -->
+
+    <!-- Início do rodapé -->
+    <footer>
+        <p>&copy; 2024 MatchPoint. Todos os direitos reservados.</p>
+    </footer>
+    <!-- Fim do rodapé -->
+
+    <!-- Scripts Bootstrap e JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/script/script_criargrupo.js"></script> <!-- Adicionando o script JavaScript -->
+    <script src="assets/script/cabecalho.js"></script>
+
+</body>
+</html>

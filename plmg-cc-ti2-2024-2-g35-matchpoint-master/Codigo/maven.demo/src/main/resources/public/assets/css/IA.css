@@ -1,0 +1,192 @@
+h2 {
+    text-align: center;
+    color: #f36f21;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ia {
+    text-align: center;
+}
+
+.image-selection {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.image-selection img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #2a2a2a;
+}
+
+.image-selection img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 2px solid #f36f21;
+}
+
+.upload-label {
+    color: white;
+}
+
+#resultado {
+    color: white;
+    padding-top: 10px;
+}
+
+h1 {
+    color: #f36f21;
+}
+
+.cabecalho {
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #000;
+    align-items: center;
+}
+
+.imglogo img {
+    width: 20%;
+    height: auto;
+}
+
+.secoes ul {
+    margin: 0;
+    padding: 0;
+}
+
+.secoes ul li {
+    display: inline-block;
+    padding: 30px;
+}
+
+.secoes ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.secoes ul li a:hover {
+    color: #ccc;
+}
+
+.secoes .dropdown-menu {
+    background-color: #333;
+    border: none;
+}
+
+.secoes .dropdown-menu .dropdown-item {
+    color: #f36f21;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 5px 10px;
+    font-size: medium;
+    line-height: 1.5;
+}
+
+.secoes .dropdown-menu .dropdown-item:hover {
+    background-color: #555;
+    color: #f36f21;
+}
+
+.meuperfil {
+    float: right;
+    color: white;
+}
+
+.meuperfil a {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.meuperfil a:hover {
+    color: #ccc;
+}
+
+.meuperfil .dropdown-menu .dropdown-item {
+    color: #f36f21;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    padding: 5px 10px;
+    font-size: medium;
+    line-height: 1.5;
+}
+
+.meuperfil .dropdown-menu .dropdown-item:hover {
+    background-color: #555;
+    color: #f36f21;
+}
+
+.meuperfil .dropdown-menu {
+    background-color: #333;
+    border: none;
+}
+
+#imagem-preview-container {
+    text-align: center;
+    padding-left: 100px;
+    margin-top: 20px;
+}
+
+#imagem-preview {
+    max-width: 100%;
+    max-height: 400px;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+#uploadBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#uploadBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+footer {
+    position: absolute;
+    text-align: center;
+    padding: 7px;
+    background-color: #000;
+    color: white;
+    bottom: 0;
+    width: 97.7%;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 60px;
+    background-color: #121212;
+    font-family: 'Roboto', sans-serif;
+}

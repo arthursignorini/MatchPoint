@@ -1,0 +1,495 @@
+/* Reset básico e estilos gerais */
+
+
+
+
+/* Estilos para o formulário */
+.container-form {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.container-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f36f21;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+}
+
+.submit-btn:hover {
+    background-color: #ffa95f;
+}
+
+/* Estilos para a foto-placeholder */
+.foto-placeholder {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border 0.3s;
+}
+
+.foto-placeholder:hover {
+    border-color: #f36f21;
+}
+
+/* Estilos para o contêiner de seleção de imagem */
+
+.image-selection-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    }
+    
+    .image-selection {
+        width: 200%;
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    background-color: #444;
+    border-radius: 8px;
+    }
+    
+    .image-option {
+    cursor: pointer;
+    }
+    
+    .image-option img {
+    max-width: 120px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+    } 
+
+.image-option img:hover {
+    border: 2px solid #f36f21;
+}
+
+
+/* Estilos para o formulário */
+.container-form {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    max-width: 80%; /* Ajustar largura do formulário */
+    margin: 20px auto;
+    color: #fff;
+    position: relative; /* Para permitir posicionamento absoluto do campo de imagem */
+}
+
+.container-form h2 {
+    text-align: center;
+    color: #f36f21;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    width: 100%; /* Para evitar que o título ocupe apenas parte do contêiner */
+}
+
+/* Estilizando o texto digitado nos campos quando em foco */
+.form-control:focus,
+.form-control:not(:placeholder-shown) {
+    color: #fff; /* Cor do texto */
+}
+
+.form-control option {
+    background-color: #1c1c1c; /* Fundo do dropdown menu */
+    color: #fff; /* Cor do texto no dropdown menu */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Definindo as cores dos campos do formulário */
+.form-control {
+    width: calc(100% - 20px); /* Ajustar a largura dos campos com margens */
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: transparent; /* Fundo transparente */
+    color: #fff; /* Cor do texto */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilizando o placeholder do campo */
+.form-control::placeholder {
+    color: #ccc; /* Cor do placeholder */
+}
+
+/* Estilizando o texto digitado no campo */
+.form-control:focus {
+    outline: none; /* Remover a borda de foco */
+    background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilizando o texto digitado no campo (quando o navegador autofill) */
+.form-control:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset; /* Remover a cor de preenchimento do navegador */
+    -webkit-text-fill-color: #fff; /* Cor do texto */
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento horizontal entre os campos */
+    width: 100%; /* Para garantir que os campos ocupem toda a largura */
+}
+
+.form-group {
+    flex-basis: calc(33.33% - 10px); /* Garantir que os campos ocupem 1/3 da largura menos o gap */
+    margin-bottom: 20px; /* Espaçamento vertical entre os campos */
+}
+
+.form-group.full-width {
+    flex-basis: 100%;
+}
+
+.form-group.foto {
+    position: absolute; /* Posicionar o campo de imagem de forma absoluta */
+    top: 35px; /* Deslocar 30px para baixo */
+    left: 87%; /* Ajustar conforme necessário */
+    transform: translateX(-50%); /* Centralizar horizontalmente */
+    width: calc(33.33% - 20px); /* Largura igual a 1/3 do contêiner */
+}
+
+/* CSS para o placeholder de imagem clicável */
+.foto-placeholder {
+    width: 250px; /* Aumentando a largura */
+    height: 250px; /* Aumentando a altura */
+    border-radius: 50%;
+    background-color: #777; /* Alterando a cor para torná-la mais visível */
+    cursor: pointer;
+    margin-top: 15px;
+    position: relative; /* Para garantir que o ícone de upload fique dentro do placeholder */
+}
+
+.form-group.foto label {
+    margin-top: 45px; /* Ajuste a margem superior conforme necessário */
+}
+
+/* CSS para o ícone de upload */
+.foto-placeholder::after {
+    content: "\f093"; /* Unicode do ícone de upload */
+    font-family: 'Font Awesome 5 Free'; /* Usando a fonte Font Awesome */
+    font-weight: 900;
+    font-size: 30px;
+    color: #fff; /* Cor do ícone */
+    position: absolute; /* Posicionando o ícone dentro do placeholder */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Ajustes adicionais para o formulário */
+
+textarea.form-control {
+    resize: vertical;
+    height: 100px;
+}
+
+button[type="submit"],
+.submit-btn {
+    display: block; /* Garante que o botão ocupe toda a largura disponível */
+    width: 200px; /* Defina a largura do botão conforme necessário */
+    margin: 15px auto; /* Centraliza o botão horizontalmente */
+    padding: 15px;
+    background-color: #f36f21;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover,
+.submit-btn:hover {
+    background-color: #642906;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Espaçamento entre cabeçalho e rodapé */
+body > header + .container-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Adicionando o ícone de exclamação no botão */
+button[type="submit"]::before,
+.submit-btn::before {
+    content: "!";
+    display: inline-block;
+    margin-right: 5px;
+    font-weight: bold;
+}
+#removerImagemBtn {
+    display: block; /* Garante que o botão ocupe toda a largura disponível */
+    width: 100px; /* Defina a largura do botão conforme necessário */
+    margin: -15px 0 0 200px; /* Centraliza o botão horizontalmente */
+    padding: 5px;
+    background-color: #ff0000;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+#removerImagemBtn:hover {
+    background-color: #000; /* Cor de fundo ao passar o mouse */
+}
+#erro-esporte {
+    color: red;
+    text-align: center;
+}
+
+#div-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+#div-imagem label,
+#div-imagem input,
+#div-imagem button {
+    margin: 10px;
+}
+
+#div-imagem label {
+    color: white;
+}
+
+#div-imagem input {
+    padding: 10px;
+    background-color: white;
+}
+
+#div-imagem button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#div-imagem button:hover {
+    background-color: #45a049;
+}
+body.modal-open {
+    overflow: hidden;
+}
+.modal-block {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Altera a direção do flex para coluna */
+    gap: 20px; /* Espaçamento entre os elementos */
+    z-index: 1000;
+}
+
+.modal-block p {
+    font-size: 24px;
+    margin: 0; /* Remova o margin superior para um alinhamento mais próximo */
+    text-align: center;
+    /* Defina outras propriedades de texto conforme necessário */
+}
+
+.modal-block button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #f36f21;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-block button:hover {
+    background-color:  #642906;
+    /* Defina outras propriedades de hover conforme necessário */
+}
+
+
+/* Estilos específicos para o container de seleção de local */
+
+.local-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    align-items: center;
+    justify-content: center;
+}
+
+.interactive-image {
+    position: relative;
+}
+
+.interactive-image img {
+    width: 100%;
+    height: auto;
+}
+
+.hover-area {
+    position: absolute;
+    cursor: pointer;
+}
+
+/* Outros estilos */
+
+.hero {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+}
+/* styles.css */
+.interactive-image {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-area {
+    position: absolute;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.hover-area:hover {
+    border-width: 4px; /* Aumenta a grossura do hover */
+}
+
+.campo:hover {
+    border-color: rgba(255, 0, 0, 0.7); /* Vermelho */
+}
+
+.quadra-coberta:hover {
+    border-color: rgba(0, 255, 0, 0.7); /* Verde */
+}
+
+.quadra-5:hover {
+    border-color: rgba(0, 0, 255, 0.7); /* Azul */
+}
+
+.quadra-6:hover {
+    border-color: rgba(255, 255, 0, 0.7); /* Amarelo */
+}
+
+.quadra-4:hover {
+    border-color: rgba(255, 0, 255, 0.7); /* Magenta */
+}
+
+.quadra-2:hover {
+    border-color: rgba(0, 255, 255, 0.7); /* Ciano */
+}
+
+.quadra-3:hover {
+    border-color: rgba(255, 165, 0, 0.7); /* Laranja */
+}
+
+.quadra-1:hover {
+    border-color: rgba(128, 0, 128, 0.7); /* Roxo */
+}
+
+.selected {
+    border: 4px solid red; /* Estilo para indicar a seleção */
+}
+#localImageContainer{
+    top:20%;
+    left: 30%;
+}
+
+
+
+
+
+
+

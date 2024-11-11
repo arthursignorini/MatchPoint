@@ -1,0 +1,223 @@
+/* Estilos para o perfil visualizável */
+.container {
+    
+    max-width: 800px;
+    margin: 150px auto;
+    padding: 20px;
+    background-color: #1c1c1c; /* Cor de fundo semelhante ao seu perfil */
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-img img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f36f21;
+}
+
+.profile-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.profile-details h1 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.bio-section p {
+    color: #ccc;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .profile-info {
+        flex-direction: column;
+    }
+}
+
+/* Outros estilos, se necessário */
+.meusseguidores ul {
+    list-style-type: none; /* Remove os marcadores de lista */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Torna a lista um flex container */
+}
+
+.meusseguidores ul li {
+    margin-right: 10px; /* Espaçamento entre os itens */
+}
+
+.meusseguidores ul li:last-child {
+    margin-right: 0; /* Remove o espaçamento do último item */
+}
+/* Estilos para o perfil visualizável */
+.container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #1c1c1c; /* Cor de fundo semelhante ao seu perfil */
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: relative; /* Para posicionamento absoluto do botão */
+}
+
+.seguir-btn {
+    position: absolute;
+    top: 10px; /* Ajuste a posição vertical conforme necessário */
+    right: 10px; /* Ajuste a posição horizontal conforme necessário */
+    background-color: #f36f21;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    /* Estilos para os botões Seguir, Deixar de Seguir e Seguindo */
+    .btnSeguir, .btnDeixarSeguir, .btnSeguindo {
+        background-color: #4CAF50; /* Cor de fundo padrão */
+        color: white; /* Cor do texto */
+        border: none; /* Sem borda */
+        padding: 10px 20px; /* Espaçamento interno */
+        text-align: center; /* Alinhamento do texto */
+        text-decoration: none; /* Sem decoração de texto */
+        display: inline-block; /* Exibição em linha */
+        font-size: 16px; /* Tamanho da fonte */
+        cursor: pointer; /* Cursor ao passar */
+        border-radius: 5px; /* Borda arredondada */
+        transition: background-color 0.3s; /* Transição suave de cor de fundo */
+        margin-right: 10px; /* Margem à direita */
+    }
+
+    /* Estilo para botão Deixar de Seguir */
+    .btnDeixarSeguir {
+        background-color: #f44336; /* Cor de fundo vermelha */
+    }
+
+    /* Estilo para botão Seguindo */
+    .btnSeguindo {
+        background-color: #4CAF50; /* Cor de fundo verde */
+        cursor: default; /* Desativar cursor */
+    }
+
+    /* Estilos para botões ao passar o mouse */
+    .btnSeguir:hover, .btnDeixarSeguir:hover {
+        background-color: #45a049; /* Mudança de cor ao passar o mouse */
+    }
+
+
+.seguir-btn:hover {
+    background-color: #642906;
+}
+    /* Estilos para o botão Seguir */
+    #btnSeguir {
+        background-color: #f36f21; /* Cor de fundo */
+        color: white; /* Cor do texto */
+        border: none; /* Sem borda */
+        padding: 10px 20px; /* Espaçamento interno */
+        text-align: center; /* Alinhamento do texto */
+        text-decoration: none; /* Sem decoração de texto */
+        display: inline-block; /* Exibição em linha */
+        font-size: 16px; /* Tamanho da fonte */
+        cursor: pointer; /* Cursor ao passar */
+        border-radius: 5px; /* Borda arredondada */
+        transition: background-color 0.3s; /* Transição suave de cor de fundo */
+    }
+
+    /* Estilos para o botão Seguir quando hover */
+    #btnSeguir:hover {
+        background-color: #45a049; /* Mudança de cor ao passar o mouse */
+    }
+    /* Estilos para palavras clicáveis */
+.link-clickable {
+    cursor: pointer;
+    text-decoration: underline;
+    color: white; /* Cor branca */
+}
+
+/* Estilos para a lista de seguidores/seguindo */
+.lista-seguidores,
+.lista-seguindo {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0; /* Cor de fundo para destacar */
+    display: none; /* Começa escondido */
+}
+
+.lista-seguidores a,
+.lista-seguindo a {
+    display: block;
+    margin-bottom: 5px;
+    color: white; /* Cor branca */
+    text-decoration: none;
+}
+
+.lista-seguidores a:hover,
+.lista-seguindo a:hover {
+    text-decoration: underline;
+    color: lightgrey; /* Cor de hover para destacar */
+}
+
+.hidden {
+    display: none;
+}
+.card {
+    width: 80%; /* Ajuste conforme necessário */
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#cardContent {
+    position: relative; /* Para posicionamento absoluto do botão e dos containers */
+}
+
+#followersList,
+#followingList {
+    width: calc(50% - 10px); /* 50% da largura menos o espaçamento entre eles */
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: none; /* Inicialmente oculto */
+}
+
+#followersList.show,
+#followingList.show {
+    display: block; /* Mostra quando a classe .show é aplicada */
+}
+
+#toggleButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #888;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> <!-- Home page -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchPoint</title><!-- Titulo da pagina -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/9847d1c927.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/style_footer.css">
+    <link rel="stylesheet" href="assets/css/style_header.css">
+    <link rel="stylesheet" href="assets/css/mapastyle.css">
+</head>
+
+<body>
+         <!-- Início do cabeçalho -->
+    <header class="cabecalho">
+        <div class="imglogo">
+            <a href="HomePage.html"><img src="assets/img/matchpoint.png" alt="Logo MatchPoint"></a>
+        </div>
+        <nav class="secoes">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="Perfilvisualizavel.html" aria-expanded="false">Navegar</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Grupos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="CriarGrupo.html">Criar Grupo</a></li>
+                        <li><a class="dropdown-item" href="MeusGrupos.html">Meus Grupos</a></li>
+                        <li><a class="dropdown-item" href="HomePage.html">Todos Grupos</a></li>
+                    </ul>
+                </li>
+                <li><a href="Mapa.html">Mapa</a></li>
+                <li><a href="FAQ.html"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="meuperfil">
+            <li class="nav-item dropdown" style="list-style: none;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span id="userNameDropdown"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="meuperfil.html">Meu Perfil</a></li>
+                    <li><a class="dropdown-item" href="index.html">Sair</a></li>
+                </ul>
+            </li>
+        </div>
+        
+
+
+    </header>
+    <!-- Fim do cabeçalho -->
+
+
+    <main>
+        <section>
+            <div class="container d-flex justify-content-center align-items-center my-5">
+                <form id="submitEndereco">
+                    <h1 class="text-center py-3">Formulário de Endereço</h1>
+                    <div class="form-group py-3">
+                        <label for="endereco">Endereço:</label>
+                        <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite seu endereço aqui" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o seu Bairro" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <label for="cep">CEP:</label>
+                        <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite seu CEP" >
+                    </div>
+                    <button type="submit">Mostrar Rota</button>
+                </form>
+            </div>
+        </section>
+        <section>
+            <button onclick="getRoute()">Localização atual</button>
+            <div id="tirandooponto" class="container d-flex justify-content-center align-items-center my-3">
+                <a href='http://maps-generator.com/pt'>..</a>
+            </div>
+            <div class="container d-flex justify-content-center align-items-center mt-5">
+                <div id="MSOZoneCell_WebPartctl00_ctl35_g_87d79acf_f40a_4010_8d16_ae6478152ab2" class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical ms-fullWidth ">
+                    <div class="ms-webpart-chrome ms-webpart-chrome-vertical ms-webpart-chrome-fullWidth ">
+                        <div webpartid="87d79acf-f40a-4010-8d16-ae6478152ab2" haspers="false" id="WebPartctl00_ctl35_g_87d79acf_f40a_4010_8d16_ae6478152ab2" width="100%" class="ms-WPBody " allowdelete="false" allowexport="false" ><div id="ctl00_ctl35_g_87d79acf_f40a_4010_8d16_ae6478152ab2">
+                            <div class="ms-rte-embedcode ms-rte-embedwp">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.021348449546!2d-43.992545784527884!3d-19.92350518660744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa696fab9a15a25%3A0x929c67486f612770!2sR.+Dom+Jos%C3%A9+G%C3%A1spar%2C+500+-+Cora%C3%A7%C3%A3o+Eucar%C3%ADstico%2C+Belo+Horizonte+-+MG!5e0!3m2!1spt-BR!2sbr!4v1500476131934" width="100%" height="400" frameborder="0" style="border: 0px;"></iframe></div>
+                        </div><div class="ms-clear"></div></div>
+                    </div><div class="ms-PartSpacingVertical"></div>
+                </div></div>
+        </section>
+        
+    </main>
+   
+
+    <!-- Começo rodape -->
+    <footer>
+        <p>&copy; 2024 MatchPoint. Todos os direitos reservados.</p>
+    </footer>
+    <!-- Fim rodape -->
+
+    <!--script q faz o bootstrap funcionar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--script q faz o javacript funcionar -->
+    <script src="assets/script/mapa.js"></script>    <script src="assets/script/cabecalho.js"></script>
+
+</body>
+
+</html>
