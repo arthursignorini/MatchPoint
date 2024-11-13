@@ -80,4 +80,8 @@ public class GrupoService {
     public String buscarEnderecoImagemPorGrupo(int idGrupo) {
         return grupoDAO.buscarEnderecoImagemPorGrupo(idGrupo);
     }
+
+    public ArrayList<Grupo> getGruposIA(String esporte) {
+        return grupoDAO.getGruposIA(esporte);
+    }
 }

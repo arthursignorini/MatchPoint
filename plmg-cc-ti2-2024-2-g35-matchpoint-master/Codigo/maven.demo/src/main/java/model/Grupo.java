@@ -12,6 +12,13 @@ public class Grupo {
     private String criador;
     private String imagem;
 
+    @Override
+    public String toString() {
+        return "Grupo [id=" + id + ", nome=" + nome + ", data=" + data + ", horario=" + horario + ", descricao="
+                + descricao + ", local=" + local + ", id_esporte=" + id_esporte + ", jogadoresMax=" + jogadoresMax
+                + ", criador=" + criador + ", imagem=" + imagem + "]";
+    }
+
     public Grupo(int id, String nome, String data, String horario, String descricao, String local, int id_esporte,
             int jogadoresMax, String criador, String imagem) {
         this.id = id;

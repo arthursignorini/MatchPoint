@@ -412,5 +412,24 @@ public class Aplicacao {
                 return "{\"error\":\"Usuário não encontrado.\"}";
             }
         });
+
+        get("/gruposIA", (req, res) -> {
+            res.type("application/json");
+
+            String esporte = req.queryParams("esporte");
+            System.out.println("\n\n\n\n\n\n\n\n\n\nEsporte: " + esporte);
+
+            ArrayList<Grupo> gruposIA = grupoService.getGruposIA(esporte);
+            for(int i=0; i<gruposIA.size();i++) {
+                System.out.println(gruposIA.get(i));
+            }
+
+            if (gruposIA == null || gruposIA.isEmpty()) {
+                res.status(404); // Not Found
+                return "{\"error\": \"Nenhum grupo encontrado para o esporte " + esporte + "\"}";
+            }
+
+            return new Gson().toJson(gruposIA);
+        });
     }
 }
