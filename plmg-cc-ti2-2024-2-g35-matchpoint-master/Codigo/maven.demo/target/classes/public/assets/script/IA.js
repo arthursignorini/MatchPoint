@@ -1,3 +1,21 @@
+document.getElementById('imagem').addEventListener('change', function () {
+    const fileInput = document.getElementById('imagem');
+    const file = fileInput.files[0];
+
+    if (file) {
+        document.getElementById('uploadBtn').disabled = false;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const imgElement = document.getElementById('imagem-preview');
+            imgElement.style.display = 'block';
+            imgElement.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById('uploadBtn').disabled = true;
+    }
+});
+
 document.getElementById('uploadBtn').addEventListener('click', async function () {
     const fileInput = document.getElementById('imagem');
     const file = fileInput.files[0];
@@ -22,90 +40,101 @@ document.getElementById('uploadBtn').addEventListener('click', async function ()
         }
 
         const result = await response.json();
-        const predictions = result.predictions;
-        const highestPrediction = predictions.reduce((max, prediction) => prediction.probability > max.probability ? prediction : max);
+        handlePredictionResult(result.predictions);
 
-        let outputMessage = "";
-        if (highestPrediction.probability >= 0.5) {
-            outputMessage = `Esporte identificado: ${highestPrediction.tagName} com ${Math.round(highestPrediction.probability * 100)}% de confiança.`;
-            alert(`Esporte identificado: ${highestPrediction.tagName}`);
-
-            let esporte = highestPrediction.tagName;
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            const username = usuarioLogado.usuario;
-
-            fetch(`http://localhost:4567/gruposIA?esporte=${encodeURIComponent(esporte)}`)
-                .then(response => response.json())
-                .then(grupos => {
-                    const gruposContainer = document.getElementById('grupos-row');
-                    const emptyMessage = document.getElementById('empty-message');
-
-                    // Limpa o conteúdo do container antes de adicionar os novos cards
-                    gruposContainer.innerHTML = '';
-
-                    if (grupos.length === 0) {
-                        emptyMessage.style.display = 'block';
-                    } else {
-                        emptyMessage.style.display = 'none';
-
-                        // Criar e adicionar os cards para cada grupo
-                        grupos.forEach((grupo) => {
-                            console.log('Processando grupo:', grupo);  // Log para verificar os dados do grupo
-
-                            const col = document.createElement('div');
-                            col.className = 'col-md-6';
-
-                            const card = createGroupCard(grupo, username);
-
-                            col.appendChild(card);
-                            gruposContainer.appendChild(col);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar os grupos:', error);
-                    emptyMessage.style.display = 'block';
-                });
-
-        } else {
-            outputMessage = "Não foi possível prever com confiança.";
-        }
-
-        document.getElementById('resultado').innerText = outputMessage;
     } catch (error) {
         console.error('Erro ao enviar imagem:', error);
         document.getElementById('resultado').innerText = 'Erro ao enviar imagem para a API.';
     }
 });
 
+function handlePredictionResult(predictions) {
+    const highestPrediction = predictions.reduce((max, prediction) => 
+        prediction.probability > max.probability ? prediction : max
+    );
+
+    let outputMessage = "";
+    if (highestPrediction.probability >= 0.5) {
+        outputMessage = `Esporte identificado: ${highestPrediction.tagName} com ${Math.round(highestPrediction.probability * 100)}% de confiança.`;
+        alert(`Esporte identificado: ${highestPrediction.tagName}`);
+        pegarGrupos(highestPrediction.tagName);
+    } else {
+        outputMessage = "Não foi possível prever com confiança.";
+    }
+
+    document.getElementById('resultado').innerText = outputMessage;
+}
+
+function pegarGrupos(esporte) {
+
+    fetch(`http://localhost:4567/gruposIA?esporte=${encodeURIComponent(esporte)}`)
+        .then(response => response.json())
+        .then(grupos => {
+            console.log("Grupos recebidos:", grupos); // Log para verificar os dados recebidos
+            displayGroups(grupos); // Função para exibir os grupos na interface
+        })
+        .catch(error => {
+            console.error('Erro ao carregar os grupos:', error);
+            document.getElementById('empty-message').style.display = 'block';
+        });
+}
+
+function displayGroups(grupos, username) {
+    const gruposContainer = document.getElementById('grupos-row');
+    const emptyMessage = document.getElementById('empty-message');
+
+    // Limpar o conteúdo anterior
+    gruposContainer.innerHTML = '';
+
+    // Verifica se há grupos para exibir
+    if (grupos.length === 0) {
+        emptyMessage.style.display = 'block';
+    } else {
+        emptyMessage.style.display = 'none';
+
+        // Para cada grupo, cria um card e adiciona ao contêiner
+        grupos.forEach(grupo => {
+            const card = createGroupCard(grupo, username);
+            gruposContainer.appendChild(card);
+        });
+    }
+}
 
 // Função para criar o card de grupo
 function createGroupCard(grupo, username) {
     const card = document.createElement('div');
     card.className = 'card grupo';
 
+    // Título do grupo
     const title = document.createElement('h2');
     title.textContent = grupo.nome;
 
+    // Data do grupo
     const date = document.createElement('p');
     date.textContent = 'Data: ' + grupo.data;
 
+    // Criador do grupo
     const criador = document.createElement('p');
     criador.textContent = `Criador: ${grupo.criador}`;
     criador.className = 'criador';
 
+    // Local do grupo
     const location = document.createElement('p');
     location.textContent = `Local: ${grupo.local}`;
 
+    // Imagem do grupo
     const img = document.createElement('img');
-    img.src = grupo.imagem;
+    img.src = grupo.imagem; // Imagem de carregamento inicial
     img.alt = grupo.esporte;
     img.className = 'card-img-top';
 
+
+    // Container da imagem
     const imgContainer = document.createElement('div');
     imgContainer.className = 'card-img-container';
     imgContainer.appendChild(img);
 
+    // Botão "Mais Detalhes"
     const detalhesButton = document.createElement('a');
     detalhesButton.textContent = 'Mais Detalhes';
     detalhesButton.className = 'btn btn-info btn-detalhes';
@@ -117,10 +146,11 @@ function createGroupCard(grupo, username) {
     entrarButton.className = 'btn btn-success btn-entrar';
     entrarButton.addEventListener('click', function () {
         console.log('Grupo ID:', grupo.id);    
-        console.log('Username:', username);
-        entrarNoGrupo(grupo.id, username);
+        console.log('Username:', username);    
+        entrarNoGrupo(grupo.id, username);     
     });
 
+    // Montando o card
     card.appendChild(imgContainer);
     card.appendChild(title);
     card.appendChild(date);
@@ -131,32 +161,4 @@ function createGroupCard(grupo, username) {
 
     return card;
 }
-
-// Função para enviar a requisição ao backend para entrar no grupo
-function entrarNoGrupo(grupoId, username) {
-    // Cria a URL com os parâmetros de query
-    const url = `http://localhost:4567/entrarNoGrupo?usuario=${encodeURIComponent(username)}&grupoId=${encodeURIComponent(grupoId)}`;
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('Você entrou no grupo com sucesso!');
-                window.location.href = "/MeusGrupos.html"
-            } else {
-                alert('Erro ao entrar no grupo. Tente novamente.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro ao entrar no grupo. Por favor, tente novamente.');
-        });
-}
-
-loadGroups();
-
 
