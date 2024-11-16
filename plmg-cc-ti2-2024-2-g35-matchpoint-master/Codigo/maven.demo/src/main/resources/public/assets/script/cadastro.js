@@ -63,10 +63,6 @@ function leDados() {
   return objDados;
 }
 
-function salvaDados(dados) {
-  localStorage.setItem('login', JSON.stringify(dados));
-}
-
 function incluirContato() {
   // Verifica se todos os campos obrigatórios estão preenchidos corretamente
   if (!validNome || !validEmail || !validSenha) {
