@@ -53,9 +53,7 @@
         </div>
     </header>
     <!-- Fim do cabeçalho -->
-
-    <a href="IA.html">Filtrar grupos</a>
-
+    <a href="IA.html">Filtrar</a>
     <div class="container grupos-container">
         <div class="row" id="grupos-row"></div>
         <div class="text-center" id="empty-message" style="display: none;">
@@ -63,6 +61,16 @@
             <button class="btn" onclick="window.location.href='CriarGrupo.html'">Criar Grupo</button>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <ul id="modal-participants"></ul>
+        </div>
+    </div>
+
 
     <footer>
         <p>&copy; 2024 MatchPoint. Todos os direitos reservados.</p>

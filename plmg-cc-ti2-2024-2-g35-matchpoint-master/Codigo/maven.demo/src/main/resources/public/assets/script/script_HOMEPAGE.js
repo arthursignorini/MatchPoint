@@ -85,10 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
         imgContainer.className = 'card-img-container';
         imgContainer.appendChild(img);
 
-        const detalhesButton = document.createElement('a');
-        detalhesButton.textContent = 'Mais Detalhes';
+        // Botão "Mais Detalhes" que abre o modal
+        const detalhesButton = document.createElement('button');
+        detalhesButton.textContent = 'Participantes';
         detalhesButton.className = 'btn btn-info btn-detalhes';
-        detalhesButton.href = `detalhes_grupo.html?grupo=${encodeURIComponent(grupo.nome)}`;
+        detalhesButton.addEventListener('click', function () {
+            carregarDetalhes(grupo.id);
+            openModal(grupo);
+        });
 
         // Botão "Entrar no grupo"
         const entrarButton = document.createElement('button');
@@ -138,3 +142,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadGroups();
 });
+
+function openModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+
+// Fechar o modal ao clicar fora dele
+window.onclick = function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+function carregarDetalhes(grupoId) { 
+    const url = `http://localhost:4567/obterParticipantes?grupoId=${encodeURIComponent(grupoId)}`;
+    
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar detalhes do grupo');
+            }
+            return response.json();  
+        })
+        .then(dadosGrupo => {
+            
+            document.getElementById('modal-title').textContent = 'Participantes do Grupo'; 
+        
+            const participantsList = document.getElementById('modal-participants');
+            participantsList.innerHTML = '';  
+
+            if (Array.isArray(dadosGrupo)) {
+                dadosGrupo.forEach(participante => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = participante; 
+                    participantsList.appendChild(listItem);
+                });
+            } else {
+                
+                alert('Formato de resposta inesperado');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar os detalhes do grupo:', error);
+            alert('Erro ao carregar os detalhes do grupo. Tente novamente mais tarde.');
+        });
+}

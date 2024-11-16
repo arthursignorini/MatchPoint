@@ -51,7 +51,7 @@ document.getElementById('profileForm').addEventListener('submit', function (even
             // Atualiza o nome do usuário logado no localStorage com o novo nome
             usuarioLogado.usuario = userNameFromForm;  // Atualiza o nome com o novo nome
             localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));  // Salva o novo nome no localStorage 
-            window.location.href = "/HomePage.html";
+            window.location.href = "/meuperfil.html";
         })
         .catch(error => {
             console.error('Erro:', error);

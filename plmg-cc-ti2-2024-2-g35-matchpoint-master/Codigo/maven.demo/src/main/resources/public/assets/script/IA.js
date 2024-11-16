@@ -49,7 +49,7 @@ document.getElementById('uploadBtn').addEventListener('click', async function ()
 });
 
 function handlePredictionResult(predictions) {
-    const highestPrediction = predictions.reduce((max, prediction) => 
+    const highestPrediction = predictions.reduce((max, prediction) =>
         prediction.probability > max.probability ? prediction : max
     );
 
@@ -70,8 +70,10 @@ function pegarGrupos(esporte) {
     fetch(`http://localhost:4567/gruposIA?esporte=${encodeURIComponent(esporte)}`)
         .then(response => response.json())
         .then(grupos => {
-            console.log("Grupos recebidos:", grupos); // Log para verificar os dados recebidos
-            displayGroups(grupos); // Função para exibir os grupos na interface
+            console.log("Grupos recebidos:", grupos);
+            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+            const username = usuarioLogado.usuario;
+            displayGroups(grupos, username);
         })
         .catch(error => {
             console.error('Erro ao carregar os grupos:', error);
@@ -94,8 +96,13 @@ function displayGroups(grupos, username) {
 
         // Para cada grupo, cria um card e adiciona ao contêiner
         grupos.forEach(grupo => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6';
+
             const card = createGroupCard(grupo, username);
-            gruposContainer.appendChild(card);
+
+            col.appendChild(card);
+            gruposContainer.appendChild(col);
         });
     }
 }
@@ -124,7 +131,7 @@ function createGroupCard(grupo, username) {
 
     // Imagem do grupo
     const img = document.createElement('img');
-    img.src = grupo.imagem; // Imagem de carregamento inicial
+    img.src = grupo.imagem;
     img.alt = grupo.esporte;
     img.className = 'card-img-top';
 
@@ -134,20 +141,23 @@ function createGroupCard(grupo, username) {
     imgContainer.className = 'card-img-container';
     imgContainer.appendChild(img);
 
-    // Botão "Mais Detalhes"
-    const detalhesButton = document.createElement('a');
-    detalhesButton.textContent = 'Mais Detalhes';
+    // Botão "Mais Detalhes" que abre o modal
+    const detalhesButton = document.createElement('button');
+    detalhesButton.textContent = 'Participantes';
     detalhesButton.className = 'btn btn-info btn-detalhes';
-    detalhesButton.href = `detalhes_grupo.html?grupo=${encodeURIComponent(grupo.nome)}`;
+    detalhesButton.addEventListener('click', function () {
+        carregarDetalhes(grupo.id);
+        openModal(grupo);
+    });
 
     // Botão "Entrar no grupo"
     const entrarButton = document.createElement('button');
     entrarButton.textContent = 'Entrar no grupo';
     entrarButton.className = 'btn btn-success btn-entrar';
     entrarButton.addEventListener('click', function () {
-        console.log('Grupo ID:', grupo.id);    
-        console.log('Username:', username);    
-        entrarNoGrupo(grupo.id, username);     
+        console.log('Grupo ID:', grupo.id);
+        console.log('Username:', username);
+        entrarNoGrupo(grupo.id, username);
     });
 
     // Montando o card
@@ -160,5 +170,82 @@ function createGroupCard(grupo, username) {
     card.appendChild(entrarButton);
 
     return card;
+}
+
+// Função para enviar a requisição ao backend para entrar no grupo
+function entrarNoGrupo(grupoId, username) {
+
+    const url = `http://localhost:4567/entrarNoGrupo?usuario=${encodeURIComponent(username)}&grupoId=${encodeURIComponent(grupoId)}`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Você entrou no grupo com sucesso!');
+                window.location.href = "/MeusGrupos.html"
+            } else {
+                alert('Erro ao entrar no grupo. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao entrar no grupo. Por favor, tente novamente.');
+        });
+}
+
+function openModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+
+// Fechar o modal ao clicar fora dele
+window.onclick = function (event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+function carregarDetalhes(grupoId) {
+    const url = `http://localhost:4567/obterParticipantes?grupoId=${encodeURIComponent(grupoId)}`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar detalhes do grupo');
+            }
+            return response.json();
+        })
+        .then(dadosGrupo => {
+
+            document.getElementById('modal-title').textContent = 'Participantes do Grupo';
+
+            const participantsList = document.getElementById('modal-participants');
+            participantsList.innerHTML = '';
+
+            if (Array.isArray(dadosGrupo)) {
+                dadosGrupo.forEach(participante => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = participante;
+                    participantsList.appendChild(listItem);
+                });
+            } else {
+
+                alert('Formato de resposta inesperado');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar os detalhes do grupo:', error);
+            alert('Erro ao carregar os detalhes do grupo. Tente novamente mais tarde.');
+        });
 }
 

@@ -18,24 +18,6 @@ public class Aplicacao {
         UsuarioService usuarioService = new UsuarioService();
         GrupoService grupoService = new GrupoService();
 
-        // Habilitar CORS
-        options("/*", (request, response) -> {
-            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
-                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-            }
-
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
-
-            return "OK";
-        });
-
-        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-
-
         // USUÁRIOS
         post("/cadastrar", (request, response) -> {
             String nome = request.queryParams("nome");
@@ -437,6 +419,11 @@ public class Aplicacao {
             String esporte = req.queryParams("esporte");
             System.out.println("\n\n\n\n\n\n\n\n\n\nEsporte: " + esporte);
 
+
+            if(esporte.equals("Vôlei")) {
+                esporte = "Volei";
+            }
+
             ArrayList<Grupo> gruposIA = grupoService.getGruposIA(esporte);
             for(int i=0; i<gruposIA.size();i++) {
                 System.out.println(gruposIA.get(i));
@@ -449,5 +436,28 @@ public class Aplicacao {
 
             return new Gson().toJson(gruposIA);
         });
+
+        get("/obterParticipantes", (req, res) -> {
+            res.type("application/json");
+            String grupoId = req.queryParams("grupoId");
+            int idGrupo = Integer.parseInt(grupoId);
+            System.out.println(idGrupo);
+
+            List<String> participantes = grupoService.getParticipantesDoGrupo(idGrupo);
+
+            System.out.println(participantes);
+            
+
+            if (participantes != null) {
+                
+                return new Gson().toJson(participantes);
+                
+            } else {
+                res.status(404); 
+                return new Gson().toJson("Grupo não encontrado");
+            }
+        });
     }
+
+    
 }

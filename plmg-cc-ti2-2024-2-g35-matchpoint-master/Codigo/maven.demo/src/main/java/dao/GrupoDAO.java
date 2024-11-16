@@ -194,39 +194,39 @@ public class GrupoDAO extends DAO {
 
     public ArrayList<Grupo> getTodosGrupos(String usuario) {
         ArrayList<Grupo> grupos = new ArrayList<>();
-
+    
         // Consulta para obter o ID do usuário com base no nome
         String sqlGetUserId = "SELECT id FROM usuario WHERE nome = ?";
-
+        
         // Consulta para obter todos os grupos em que o usuário não está participando
         String sqlGetGroups = "SELECT * FROM grupos WHERE id NOT IN (SELECT id_grupo FROM usuario_grupo WHERE id_usuario = ?)";
-
+    
         try {
             // Primeiro, obtemos o ID do usuário
             PreparedStatement stmtUser = conexao.prepareStatement(sqlGetUserId);
-            stmtUser.setString(1, usuario); // Nome do usuário passado para o método
+            stmtUser.setString(1, usuario);  // Nome do usuário passado para o método
             ResultSet rsUser = stmtUser.executeQuery();
-
+    
             int userId = -1;
             if (rsUser.next()) {
                 userId = rsUser.getInt("id");
                 System.out.println("ID do usuário obtido: " + userId);
             }
-
+    
             rsUser.close();
             stmtUser.close();
-
+    
             // Se o usuário não for encontrado, retornar a lista vazia
             if (userId == -1) {
                 System.out.println("Usuário não encontrado: " + usuario);
                 return grupos;
             }
-
+    
             // Agora obtemos todos os grupos onde o usuário não está participando
             PreparedStatement stmtGroups = conexao.prepareStatement(sqlGetGroups);
-            stmtGroups.setInt(1, userId); // Passa o ID do usuário para a query
+            stmtGroups.setInt(1, userId);  // Passa o ID do usuário para a query
             ResultSet rsGroups = stmtGroups.executeQuery();
-
+    
             while (rsGroups.next()) {
                 Grupo grupo = new Grupo();
                 grupo.setId(rsGroups.getInt("id"));
@@ -234,40 +234,40 @@ public class GrupoDAO extends DAO {
                 grupo.setData(rsGroups.getString("data"));
                 grupo.setCriador(rsGroups.getString("criador"));
                 grupo.setLocal(rsGroups.getString("local"));
-
+    
                 grupos.add(grupo);
             }
-
+    
             rsGroups.close();
             stmtGroups.close();
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+    
         return grupos;
     }
 
     public boolean atualizar(GrupoAtualizado grupo) {
         String sql = "UPDATE grupos SET nome = ?, data = ?, horario = ?, local = ?, jogadoresmax = ? WHERE id = ?";
-
+    
         try {
             // Prepara a instrução SQL
             PreparedStatement stmt = conexao.prepareStatement(sql);
-
+            
             // Define os valores dos parâmetros
-            stmt.setString(1, grupo.getNome()); // Nome do grupo
-            stmt.setString(2, grupo.getData()); // Data (caracteres variáveis)
-            stmt.setString(3, grupo.getHorario()); // Horário (caracteres variáveis)
-            stmt.setString(4, grupo.getLocal()); // Local
-            stmt.setInt(5, grupo.getJogadoresMax()); // Número máximo de jogadores
-            stmt.setInt(6, grupo.getId()); // ID do grupo (PK)
-
+            stmt.setString(1, grupo.getNome());               // Nome do grupo
+            stmt.setString(2, grupo.getData());               // Data (caracteres variáveis)
+            stmt.setString(3, grupo.getHorario());            // Horário (caracteres variáveis)
+            stmt.setString(4, grupo.getLocal());              // Local
+            stmt.setInt(5, grupo.getJogadoresMax());          // Número máximo de jogadores
+            stmt.setInt(6, grupo.getId());                    // ID do grupo (PK)
+    
             // Executa a atualização
             int rowsAffected = stmt.executeUpdate();
-
+    
             return rowsAffected > 0; // Se atualizou alguma linha, retorna true
-
+    
         } catch (SQLException e) {
             e.printStackTrace(); // Loga o erro
             return false;
@@ -277,47 +277,47 @@ public class GrupoDAO extends DAO {
     public boolean entrarNoGrupo(String nomeUsuario, int idGrupo) {
         String sqlGetUserId = "SELECT id FROM usuario WHERE nome = ?";
         String sqlInsertUserGroup = "INSERT INTO usuario_grupo (id_usuario, id_grupo) VALUES (?, ?)";
-
+    
         try {
             // Obter o ID do usuário pelo nome
             PreparedStatement stmtUser = conexao.prepareStatement(sqlGetUserId);
             stmtUser.setString(1, nomeUsuario);
             ResultSet rsUser = stmtUser.executeQuery();
-
+    
             int userId = -1;
             if (rsUser.next()) {
                 userId = rsUser.getInt("id");
             }
-
+    
             rsUser.close();
             stmtUser.close();
-
+    
             // Se o usuário não for encontrado, retornar falso
             if (userId == -1) {
                 System.out.println("Usuário não encontrado: " + nomeUsuario);
                 return false;
             }
-
+    
             // Inserir o usuário no grupo
             PreparedStatement stmtInsert = conexao.prepareStatement(sqlInsertUserGroup);
             stmtInsert.setInt(1, userId);
             stmtInsert.setInt(2, idGrupo);
-
+    
             int rowsAffected = stmtInsert.executeUpdate();
             stmtInsert.close();
-
+    
             // Retornar true se a inserção foi bem-sucedida
             return rowsAffected > 0;
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
             return false; // Retorna falso em caso de erro
         }
     }
-
+    
     public int getUsuarioIdByName(String nomeUsuario) {
         String sql = "SELECT id FROM usuario WHERE nome = ?";
-
+        
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, nomeUsuario);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -328,43 +328,43 @@ public class GrupoDAO extends DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
         return -1; // Retorna -1 se o usuário não for encontrado
     }
-
+    
     public boolean sairDoGrupo(int idUsuario, int idGrupo) {
         String sql = "DELETE FROM usuario_grupo WHERE id_usuario = ? AND id_grupo = ?";
-
+    
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             // Define os parâmetros da query
             stmt.setInt(1, idUsuario);
             stmt.setInt(2, idGrupo);
-
+    
             // Executa a remoção da associação
             int rowsAffected = stmt.executeUpdate();
-
+    
             // Se pelo menos uma linha foi afetada, a operação foi bem-sucedida
             return rowsAffected > 0;
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
-            return false; // Retorna falso em caso de erro
+            return false;  // Retorna falso em caso de erro
         }
     }
 
     public ArrayList<Grupo> getGruposParticipando(String nomeUsuario) {
         ArrayList<Grupo> grupos = new ArrayList<>();
-
+        
         // Consulta SQL para obter grupos onde o usuário participa, mas não é o criador
         String sql = "SELECT g.* FROM grupos g " +
-                "JOIN usuario_grupo ug ON g.id = ug.id_grupo " +
-                "JOIN usuario u ON u.id = ug.id_usuario " +
-                "WHERE u.nome = ? AND g.criador != u.nome";
-
+                     "JOIN usuario_grupo ug ON g.id = ug.id_grupo " +
+                     "JOIN usuario u ON u.id = ug.id_usuario " +
+                     "WHERE u.nome = ? AND g.criador != u.nome";
+    
         try {
             PreparedStatement stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, nomeUsuario); // Nome do usuário
-
+            stmt.setString(1, nomeUsuario);  // Nome do usuário
+    
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Grupo grupo = new Grupo();
@@ -377,29 +377,29 @@ public class GrupoDAO extends DAO {
                 grupo.setCriador(rs.getString("criador"));
                 grupo.setLocal(rs.getString("local"));
                 // Adicione os outros atributos conforme necessário
-
-                grupos.add(grupo); // Adiciona o grupo à lista
+    
+                grupos.add(grupo);  // Adiciona o grupo à lista
             }
-
+    
             rs.close();
             stmt.close();
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return grupos;
+    
+        return grupos;  
     }
 
     public boolean excluirGruposPorCriador(String nomeCriador) {
         String sqlExcluirGrupos = "DELETE FROM grupos WHERE criador = ?";
-
+    
         try (PreparedStatement stmtGrupos = conexao.prepareStatement(sqlExcluirGrupos)) {
             stmtGrupos.setString(1, nomeCriador);
             int rowsAffected = stmtGrupos.executeUpdate();
-
+    
             return rowsAffected > 0;
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -410,27 +410,27 @@ public class GrupoDAO extends DAO {
         String sqlBuscarID = "SELECT id_imagem FROM imagens WHERE endereco = ?";
         String sqlInserirRelacao = "INSERT INTO imagem_grupo (id_imagem, id_grupo) VALUES (?, ?)";
         String sqlAtualizarGrupo = "UPDATE grupos SET imagem = ? WHERE id = ?";
-
+    
         try (PreparedStatement stmtBuscarID = conexao.prepareStatement(sqlBuscarID)) {
             stmtBuscarID.setString(1, imagePath);
             ResultSet resultSet = stmtBuscarID.executeQuery();
-
+    
             if (resultSet.next()) {
                 int idImagem = resultSet.getInt("id_imagem");
-
+    
                 // Inserir a relação entre o idImagem e o idGrupo
                 try (PreparedStatement stmtInserirRelacao = conexao.prepareStatement(sqlInserirRelacao)) {
-                    stmtInserirRelacao.setInt(1, idImagem);
-                    stmtInserirRelacao.setInt(2, idGrupo);
-
+                    stmtInserirRelacao.setInt(1, idImagem); 
+                    stmtInserirRelacao.setInt(2, idGrupo); 
+    
                     int rowsInserted = stmtInserirRelacao.executeUpdate();
-
+    
                     if (rowsInserted > 0) {
                         // Atualizando o grupo com o caminho da imagem na coluna "imagem"
                         try (PreparedStatement stmtAtualizarGrupo = conexao.prepareStatement(sqlAtualizarGrupo)) {
-                            stmtAtualizarGrupo.setString(1, imagePath); // Definindo o caminho da imagem
-                            stmtAtualizarGrupo.setInt(2, idGrupo); // Definindo o ID do grupo
-
+                            stmtAtualizarGrupo.setString(1, imagePath);  // Definindo o caminho da imagem
+                            stmtAtualizarGrupo.setInt(2, idGrupo);  // Definindo o ID do grupo
+    
                             int rowsUpdated = stmtAtualizarGrupo.executeUpdate();
                             return rowsUpdated > 0; // Retorna true se o update foi bem-sucedido
                         }
@@ -443,9 +443,10 @@ public class GrupoDAO extends DAO {
             e.printStackTrace();
             return false; // Captura exceção e retorna false em caso de erro
         }
-
+        
         return false; // Garantindo retorno caso nenhuma das condições acima seja atendida
     }
+    
 
     // Função que busca o endereço da imagem por grupo
     public String buscarEnderecoImagemPorGrupo(int idGrupo) {
@@ -455,7 +456,7 @@ public class GrupoDAO extends DAO {
         if (idImagem != null) {
             return buscarEnderecoImagemPorId(idImagem);
         } else {
-            return null;
+            return null;  
         }
     }
 
@@ -467,13 +468,13 @@ public class GrupoDAO extends DAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getInt("id_imagem");
+                return rs.getInt("id_imagem"); 
             } else {
-                return null;
+                return null;  
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return null;  
         }
     }
 
@@ -485,13 +486,13 @@ public class GrupoDAO extends DAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getString("endereco");
+                return rs.getString("endereco");  
             } else {
-                return null;
+                return null; 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return null; 
         }
     }
 
@@ -524,5 +525,4 @@ public class GrupoDAO extends DAO {
 
         return grupos;
     }
-
 }

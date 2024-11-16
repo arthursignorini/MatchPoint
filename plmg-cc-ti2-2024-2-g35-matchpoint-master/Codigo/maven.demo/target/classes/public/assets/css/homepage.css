@@ -327,3 +327,87 @@
 }
 
 
+/* Estilos para o modal */
+.modal {
+    display: none; /* Inicialmente o modal está oculto */
+    position: fixed; /* Fixa o modal na tela */
+    z-index: 1; /* Garantir que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total da tela */
+    height: 100%; /* Altura total da tela */
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #3c3c3c;
+    margin: 15% auto; /* Centraliza o modal na tela */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+    max-width: 600px; /* Largura máxima do modal */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar destaque */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+/* Estilo para o botão de fechar */
+.close {
+    color: #f36f21;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Título do modal */
+#modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #f36f21;
+}
+
+/* Estilo da lista de participantes */
+#modal-participants {
+    list-style-type: none; /* Remove os pontos da lista */
+    padding: 0;
+}
+
+#modal-participants li {
+    background-color: #333232;
+    color: #f36f21;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px; /* Bordas arredondadas para os itens da lista */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave nos itens da lista */
+    transition: background-color 0.3s ease;
+}
+
+#modal-participants li:hover {
+    background-color: #414040; /* Cor de fundo ao passar o mouse */
+}
+
+a[href="IA.html"] {
+    display: inline-block;
+    background-color: #f36f21;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-left:50px;
+    margin-top: 20px;
+}
+
+a[href="IA.html"]:hover {
+    background-color: #0056b3;
+}
