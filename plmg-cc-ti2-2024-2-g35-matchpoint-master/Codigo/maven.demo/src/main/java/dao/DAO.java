@@ -2,6 +2,7 @@ package dao;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -51,10 +52,20 @@ public class DAO {
         return status;
     }
 
-    public static String toMD5(String senha) throws Exception {
+    // Gera um hash MD5 com salt
+    public static String hashPasswordWithSalt(String senha, String salt) throws Exception {
+        String saltedPassword = salt + senha; // Concatena o salt à senha
         MessageDigest m = MessageDigest.getInstance("MD5");
-        m.update(senha.getBytes(), 0, senha.length());
+        m.update(saltedPassword.getBytes(), 0, saltedPassword.length());
         return new BigInteger(1, m.digest()).toString(16);
+    }
+
+    // Gera um salt aleatório
+    public static String generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] saltBytes = new byte[16];
+        random.nextBytes(saltBytes);
+        return new BigInteger(1, saltBytes).toString(16);
     }
 
 }
