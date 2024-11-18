@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Aplicacao {
 
+    // GERAR SENHA POR HASH
     public static String gerarHashMD5(String senha) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -55,7 +56,6 @@ public class Aplicacao {
             String usuario = request.queryParams("usuario");
             String senha = request.queryParams("senha");
         
-            // Gera o hash MD5 da senha fornecida
             String senhaHasheada = gerarHashMD5(senha);
         
             Usuario user = usuarioService.verificarCredenciais(usuario, senhaHasheada);
