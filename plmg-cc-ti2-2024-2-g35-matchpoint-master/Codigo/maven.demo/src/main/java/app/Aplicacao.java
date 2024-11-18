@@ -9,7 +9,25 @@ import model.*;
 import service.GrupoService;
 import service.UsuarioService;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Aplicacao {
+
+    public static String gerarHashMD5(String senha) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hashBytes = md.digest(senha.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Erro ao gerar hash MD5", e);
+        }
+    }
+
     public static void main(String[] args) {
 
         port(4567);
@@ -23,10 +41,12 @@ public class Aplicacao {
             String nome = request.queryParams("nome");
             String email = request.queryParams("email");
             String senha = request.queryParams("senha");
-
-            Usuario novoUsuario = new Usuario(nome, email, senha, 0);
+        
+            String senhaHasheada = gerarHashMD5(senha);
+        
+            Usuario novoUsuario = new Usuario(nome, email, senhaHasheada, 0);
             usuarioService.cadastrarUsuario(novoUsuario);
-
+        
             response.redirect("/Login.html");
             return null;
         });
@@ -34,9 +54,12 @@ public class Aplicacao {
         post("/login", (request, response) -> {
             String usuario = request.queryParams("usuario");
             String senha = request.queryParams("senha");
-
-            Usuario user = usuarioService.verificarCredenciais(usuario, senha);
-
+        
+            // Gera o hash MD5 da senha fornecida
+            String senhaHasheada = gerarHashMD5(senha);
+        
+            Usuario user = usuarioService.verificarCredenciais(usuario, senhaHasheada);
+        
             if (user != null) {
                 response.status(200);
                 response.type("application/json");
@@ -47,14 +70,7 @@ public class Aplicacao {
                 return "{\"error\": \"Login falhou\"}";
             }
         });
-
-        get("/Login.html", (request, response) -> {
-            String error = request.queryParams("error");
-            if (error != null) {
-                return "<h1>Login falhou! Por favor, tente novamente.</h1>";
-            }
-            return "<h1>Por favor, faça login.</h1>";
-        });
+        
 
         post("/updateUsuario", (req, res) -> {
             res.type("application/json");
