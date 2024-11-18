@@ -402,7 +402,7 @@ public class Aplicacao {
             }
 
             Usuario perfil = usuarioService.buscarPerfilPorNome(nomeUsuario);
-
+            
             if (perfil != null) {
                 response.status(200);
                 response.type("application/json");

@@ -9,6 +9,12 @@ public class Usuario {
     private String foto;
 
 
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", bio=" + bio
+                + ", foto=" + foto + "]";
+    }
+
     public Usuario (String email, String senha, String nome, int id) {
 		this.email = email;
 		this.senha = senha;
@@ -70,13 +76,7 @@ public class Usuario {
         this.nome = nome;
     }
     
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", nome='" + nome + '\'' +
-                '}';
-    }
+    
 
     
 }

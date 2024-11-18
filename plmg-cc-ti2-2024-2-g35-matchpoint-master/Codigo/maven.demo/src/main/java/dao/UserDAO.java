@@ -378,23 +378,25 @@ public class UserDAO extends DAO {
     }
 
     public Usuario buscarPerfilPorNome(String nomeUsuario) {
-        String sql = "SELECT u.nome, u.biografia, i.endereco " +
+        
+        String sql = "SELECT u.nome, " +
+                 "       COALESCE(u.biografia, 'Sem biografia') AS biografia, " +
+                 "       COALESCE(i.endereco, 'assets/img/perfil0.jpg') AS endereco " +
                  "FROM usuario u " +
-                 "JOIN imagem_user iu ON u.id = iu.id_usuario " +  
-                 "JOIN imagens i ON iu.id_imagem = i.id_imagem " +
-                 "WHERE u.nome = ? " +
+                 "LEFT JOIN imagem_user iu ON u.id = iu.id_usuario " +
+                 "LEFT JOIN imagens i ON iu.id_imagem = i.id_imagem " +
+                 "WHERE LOWER(u.nome) = LOWER(?) " +
                  "ORDER BY iu.id_imagem DESC LIMIT 1";
- 
     
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
-            stmt.setString(1, nomeUsuario);
+            stmt.setString(1, nomeUsuario.trim());
             ResultSet rs = stmt.executeQuery();
     
             if (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setNome(rs.getString("nome"));
-                usuario.setBio(rs.getString("biografia"));  
-                usuario.setFoto(rs.getString("endereco"));  
+                usuario.setBio(rs.getString("biografia") != null ? rs.getString("biografia") : "Sem biografia");
+                usuario.setFoto(rs.getString("endereco") != null ? rs.getString("endereco") : "assets/img/perfil0.jpg");
     
                 return usuario;
             } else {
@@ -402,7 +404,7 @@ public class UserDAO extends DAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return null; 
         }
     }
     
