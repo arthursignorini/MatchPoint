@@ -1,3 +1,8 @@
+.modal-backdrop {
+    position: relative;
+}
+
+
 .container-form h2 {
     text-align: center;
     color: #f36f21;
