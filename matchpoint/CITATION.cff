@@ -1,0 +1,28 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: MatchPoint
+authors:
+  - family-names: Signorini Miranda
+    given-names: Arthur 
+  - family-names: Costa Alves
+    given-names: Cauã
+  - family-names: Ferreira e Oliveira
+    given-names: Iasmin
+  - family-names: Augusto de Assis Ferreira Monteiro
+    given-names: Otávio
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Jerônimo de Almeida
+    given-names: Sandro
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Ferreira de Carvalho
+    given-names: Walisson
+keywords:
+  - Esporte
+  - Grupos
+  - Sistema inteligente
+repository-code: 
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2024-11-25
