@@ -18,3 +18,7 @@ Este projeto foi desenvolvido como parte das atividades da disciplina Técnicas 
 * Utilização de IA para processamento e análise de imagens enviadas pelos usuários.
 
 * Identificação e classificação de imagens com precisão, utilizando APIs cognitivas da Azure.
+
+📊 Nota
+
+* Totalizamos 90,0
